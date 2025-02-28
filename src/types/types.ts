@@ -4,7 +4,7 @@ export interface ITask {
     done: boolean;
 }
 
-export type sectionType = 'Work' | 'Study' | 'Home' | 'Health' | 'Creativity'
+export type sectionType = 'All' | 'Work' | 'Study' | 'Home' | 'Health' | 'Creativity'
 export type priorityType = '🟢 Low' | '🟡 Medium' | '🔴 High' | '🚨 Critacal' | '💤 Low effort'
 
 export interface ICard {
@@ -15,4 +15,10 @@ export interface ICard {
     tasks: ITask[];
     deadline: Date;
     priority: priorityType;
+}
+
+export interface IBoard {
+    id: number;
+    title: string;
+    cards: ICard[];
 }

@@ -1,8 +1,10 @@
 import { ICard } from "../../types/types";
 import { AppDispatch } from "../store";
 import { getCardStatus } from "./reducer";
-import { REMOVE_CARD, TOGGLE_TASK } from "./types";
+import { REMOVE_CARD, TOGGLE_TASK, UPDATE_CARDS_ORDER } from "./types";
 import { ADD_CARD } from "./types";
+
+import { toast } from "react-toastify";
 
 //card
 
@@ -18,8 +20,11 @@ export const addCard = (payload: ICard) => {
                 type: ADD_CARD,
                 payload
             });
+            toast.success("Карточка успешно добавлена!"); // ✅ Добавляем уведомление
+
         } catch (err) {
             console.error("Error saving in LS", err);
+            toast.error("Ошибка при добавлении карточки!"); // ❌ Ошибка
         }
     };
 };
@@ -35,11 +40,22 @@ export const removeCard = (payload: ICard) => {
                 type: REMOVE_CARD,
                 payload: filteredCards
             })
+            toast.info("Карточка удалена!"); // ✅ Уведомление при удалении
+
         } catch (err) {
             console.error('Cant save to LS', err)
+            toast.error("Ошибка при удалении карточки!"); // ❌ Ошибка
         }
     }
 }
+
+export const updateCardsOrder = (cards: ICard[]) => {
+    return (dispatch: AppDispatch) => {
+        localStorage.setItem("cards", JSON.stringify(cards));
+        dispatch({ type: UPDATE_CARDS_ORDER, payload: cards });
+    };
+};
+
 
 //Task
 

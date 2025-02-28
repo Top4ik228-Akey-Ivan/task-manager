@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import { ICard, ITask } from "../../types/types";
-import { cardActionTypes, cardsState, ADD_CARD, TOGGLE_TASK, REMOVE_CARD } from "./types";
+import { cardActionTypes, cardsState, ADD_CARD, TOGGLE_TASK, REMOVE_CARD, UPDATE_CARDS_ORDER } from "./types";
 
 export const getCardStatus = (tasks: ITask[]): "Done" | "In Progress" => {
     return tasks.every(task => task.done) ? "Done" : "In Progress";
@@ -48,7 +48,7 @@ const loadCardsFromLocalStorage = (): ICard[] => {
 
         return parsedData.map(card => ({
             ...card,
-            id:  Number(card.id),
+            id: Number(card.id),
             deadline: new Date(card.deadline),
         }));
     } catch (err) {
@@ -69,10 +69,13 @@ export const cardsReducer: Reducer<cardsState, cardActionTypes> = (
             return { ...state, cards: [...state.cards, action.payload] }
 
         case REMOVE_CARD:
-            return {...state, cards: action.payload}
+            return { ...state, cards: action.payload }
 
         case TOGGLE_TASK:
-            return {...state, cards: action.payload.cards}
+            return { ...state, cards: action.payload.cards }
+
+        case UPDATE_CARDS_ORDER:
+            return { ...state, cards: action.payload };
 
         default:
             return state

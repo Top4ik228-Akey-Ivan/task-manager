@@ -137,3 +137,8 @@
 
     border-top: 1px solid lightgray;
 }
+
+.deadline {
+    color: red;
+    font-weight: bold;
+}

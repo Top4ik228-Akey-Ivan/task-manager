@@ -1,25 +1,17 @@
 import { Provider } from "react-redux"
-import CardsList from "./components/cardsList/cardsList"
 import store from "./redux/store"
-import Navbar from "./components/navbar/navbar"
-import { useState } from "react"
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AppRouter from "./components/appRouter/appRouter"
 
 function App() {
-
-    const [activeSection, setActiveSection] = useState('All')
 
     return (
         <div className="App">
             <Provider store={store}>
-
-                <Navbar
-                    activeSection={activeSection}
-                    setActiveSection={setActiveSection}
-                />
-                <CardsList
-                    activeSection={activeSection}
-                />
-
+                <ToastContainer position="top-center" autoClose={3000} />
+                <AppRouter/>
             </Provider>
         </div>
     )

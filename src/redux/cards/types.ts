@@ -20,6 +20,13 @@ export interface removeCardAction {
     payload: ICard[];
 }
 
+export const UPDATE_CARDS_ORDER = "UPDATE_CARDS_ORDER";
+
+export interface updateCardsOrderAction {
+    type: typeof UPDATE_CARDS_ORDER;
+    payload: ICard[];
+}
+
 //Task
 
 export const TOGGLE_TASK = 'TOGGLE_TASK'
@@ -33,3 +40,4 @@ export type cardActionTypes =
     | setCardsAction
     | toggleTaskAction
     | removeCardAction
+    | updateCardsOrderAction;
