@@ -1,30 +1,31 @@
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { ICard, ITask } from "../../types/types";
+import { IBoard, ICard, ITask } from "../../types/types";
 import styles from "./card.module.css";
 import React, { useState } from "react";
 import { AppDispatch } from "../../redux/store";
-import { removeCard, toggleTask } from "../../redux/cards/actions";
 
 import pensil from "../../assets/icons/pensil.png";
+import { removeCard, toggleTask } from "../../redux/boards/actions";
 
 interface CardProps {
+    board: IBoard;
     card: ICard;
     onDragStart: (card: ICard) => void;
     onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
     onDrop: (e: React.DragEvent<HTMLDivElement>, card: ICard) => void;
 }
 
-const Card: React.FC<CardProps> = ({ card, onDragStart, onDragOver, onDrop }) => {
+const Card: React.FC<CardProps> = ({ board, card, onDragStart, onDragOver, onDrop }) => {
     const dispatch: AppDispatch = useDispatch();
     const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
     const btnClick = (task: ITask) => {
-        dispatch(toggleTask(card.id, task.id));
+        dispatch(toggleTask(board.id, card.id, task.id));
     };
 
     const handleRemoveCard = () => {
-        dispatch(removeCard(card));
+        dispatch(removeCard(board.id, card.id));
     };
 
     return (

@@ -16,10 +16,13 @@ const Navbar: React.FC<NavbarProps> = ({activeSection, setActiveSection}) => {
         <header>
             <ul className={styles.navbar}>
                 {sections.map((section) => 
-                    <li 
+                    <li
                         key={section}
                         onClick={() => setActiveSection(section)}
-                        className={section === activeSection ? styles.activeSection : ''}
+                        className={section === activeSection 
+                            ? [styles.section, styles.activeSection].join(' ') 
+                            : styles.section
+                        }
                     >
                         {section}
                     </li>

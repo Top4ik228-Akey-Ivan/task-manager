@@ -1,4 +1,4 @@
-li {
+.section {
     list-style-type: none;
     font-size: 18px;
 
@@ -8,7 +8,7 @@ li {
     transition: .2s linear;
 }
 
-li:hover{
+.section:hover{
     border-bottom: 2px solid var(--blue);
 }
 

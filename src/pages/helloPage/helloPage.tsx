@@ -1,16 +1,20 @@
 import React from "react";
+
+import styles from './helloPage.module.css'
+
 import { IBoard } from "../../types/types";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { addBoard } from "../../redux/boards/actions";
+import BoardCard from "../../components/boardCard/boardCard";
 
 const HelloPage: React.FC = () => {
 
     const boards = useSelector((state: RootState) => state.boards.boards)
     const dispatch: AppDispatch = useDispatch()
 
-    const testBoard: IBoard  = {
+    const testBoard: IBoard = {
         id: new Date().getTime(),
         title: 'Check Board',
         cards: [
@@ -30,15 +34,24 @@ const HelloPage: React.FC = () => {
         ]
     }
 
-    console.log(boards)
-
     return (
         <div>
-            <div>Welcome to dashboard</div>
-            <div>Your`s boards</div>
+            <div className={styles.welcomeText}>Welcome to dashboard</div>
+            <div className={styles.headerText}>Your boards</div>
+
+
+            <div className={styles.boardsList}>
+                {boards.map((board) =>
+                    <BoardCard
+                        key={board.id}
+                        board={board}
+                    />
+                )}
+            </div>
+
             <button onClick={() => dispatch(addBoard(testBoard))}>Add board</button>
         </div>
     );
 }
- 
+
 export default HelloPage;

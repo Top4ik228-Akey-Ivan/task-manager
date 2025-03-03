@@ -1,26 +1,35 @@
 import styles from "./cardsList.module.css";
 import { motion, AnimatePresence } from "framer-motion";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Card from "../card/card";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 import AddCardBtn from "../addCardBtn/addCardBtn";
-import { updateCardsOrder } from "../../redux/cards/actions";
-import { ICard } from "../../types/types";
+import { IBoard, ICard } from "../../types/types";
+import { updateCardsOrder } from "../../redux/boards/actions";
 
 interface CardListProps {
     activeSection: string;
+    board: IBoard;
 }
 
-const CardsList: React.FC<CardListProps> = ({ activeSection }) => {
+const CardsList: React.FC<CardListProps> = ({ activeSection, board }) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [draggedCard, setDraggedCard] = useState<ICard | null>(null);
+    const [filteredText, setFilteredText] = useState<string>('')
 
     const dispatch: AppDispatch = useDispatch();
-    const cards = useSelector((state: RootState) => state.cards.cards);
+    const cards = board?.cards
 
-    const filteredCards =
-        activeSection === "All" ? cards : cards.filter((card) => card.section === activeSection);
+    const sortedCards = useMemo(() => {
+        return activeSection === "All" 
+            ? cards ?? [] 
+            : (cards ?? []).filter((card) => card.section === activeSection);
+    }, [cards, activeSection])
+
+    const sortedAndFilteredCards = useMemo(() => {
+        return sortedCards.filter((card) => card.title.includes(filteredText))
+    }, [sortedCards, filteredText])
 
     const handleDragStart = (card: ICard) => {
         setDraggedCard(card);
@@ -35,22 +44,29 @@ const CardsList: React.FC<CardListProps> = ({ activeSection }) => {
 
         if (!draggedCard || draggedCard.id === targetCard.id) return;
 
-        const updatedCards = [...cards];
+        const updatedCards = [...(cards ?? [])];
+
         const draggedIndex = updatedCards.findIndex((c) => c.id === draggedCard.id);
         const targetIndex = updatedCards.findIndex((c) => c.id === targetCard.id);
 
         updatedCards.splice(draggedIndex, 1);
         updatedCards.splice(targetIndex, 0, draggedCard);
 
-        dispatch(updateCardsOrder(updatedCards));
+        dispatch(updateCardsOrder(board.id, updatedCards));
         setDraggedCard(null);
     };
 
     return (
         <>
+            <input 
+                type="text" placeholder="Search" 
+                value={filteredText}
+                onChange={(e) => setFilteredText(e.target.value)}
+            />
+
             <div className={styles.cardsList}>
                 <AnimatePresence mode="popLayout">
-                    {filteredCards.map((card) => (
+                    {sortedAndFilteredCards?.map((card) => (
                         <motion.div
                             key={card.id}
                             initial={{ opacity: 0, y: -10 }}
@@ -60,6 +76,7 @@ const CardsList: React.FC<CardListProps> = ({ activeSection }) => {
                             transition={{ duration: 0.3 }}
                         >
                             <Card
+                                board={board}
                                 card={card}
                                 onDragStart={handleDragStart}
                                 onDragOver={handleDragOver}
@@ -70,7 +87,11 @@ const CardsList: React.FC<CardListProps> = ({ activeSection }) => {
                 </AnimatePresence>
             </div>
 
-            <AddCardBtn isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+            <AddCardBtn 
+                isModalOpen={isModalOpen} 
+                setIsModalOpen={setIsModalOpen} 
+                boardId={board.id}
+            />
         </>
     );
 };

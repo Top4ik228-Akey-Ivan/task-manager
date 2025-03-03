@@ -4,15 +4,17 @@ import styles from './addCardBtn.module.css'
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { ICard, ITask, priorityType, sectionType } from "../../types/types";
-import { addCard } from "../../redux/cards/actions";
+
 import Modal from "../modal/modal";
+import { addCard } from "../../redux/boards/actions";
 
 interface AddCardBrnProps {
+    boardId: number;
     isModalOpen: boolean;
     setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const AddCardBtn: React.FC<AddCardBrnProps> = ({ isModalOpen, setIsModalOpen }) => {
+const AddCardBtn: React.FC<AddCardBrnProps> = ({ boardId, isModalOpen, setIsModalOpen }) => {
 
     const [title, setTitle] = useState<string>('')
     const [section, setSection] = useState<sectionType>('Work')
@@ -46,7 +48,7 @@ const AddCardBtn: React.FC<AddCardBrnProps> = ({ isModalOpen, setIsModalOpen }) 
         if (tasks.length === 0 || !title) {
             return alert('Enter tasks and title')
         }
-        dispatch(addCard(testCard)) // Добавляем карточку в Redux
+        dispatch(addCard(boardId, testCard)) // Добавляем карточку в Redux
         setTitle('')
         setTasks([])
         setPriority('🟢 Low')
