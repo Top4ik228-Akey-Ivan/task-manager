@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { addBoard } from "../../redux/boards/actions";
 import BoardCard from "../../components/boardCard/boardCard";
+// import ThemeSwitcher from "../../components/themeSwitcher/themeSwitcher";
 
 const HelloPage: React.FC = () => {
 
@@ -39,7 +40,6 @@ const HelloPage: React.FC = () => {
             <div className={styles.welcomeText}>Welcome to dashboard</div>
             <div className={styles.headerText}>Your boards</div>
 
-
             <div className={styles.boardsList}>
                 {boards.map((board) =>
                     <BoardCard
@@ -50,6 +50,7 @@ const HelloPage: React.FC = () => {
             </div>
 
             <button onClick={() => dispatch(addBoard(testBoard))}>Add board</button>
+            <button></button>
         </div>
     );
 }
