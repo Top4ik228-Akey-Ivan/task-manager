@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
+### 📌 **Task Manager**  
+🚀 **Task Manager** — это веб-приложение для управления задачами, где можно создавать и удалять **доски**, **карточки** и **задачи**.  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Превью приложения](/src//assets/screenshots/boards.png) 
 
-Currently, two official plugins are available:
+![Превью приложения](/src//assets/screenshots/cards.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🔥 **Функционал**  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+✅ **Создание и удаление досок**  
+✅ **Добавление карточек с задачами в доску**  
+✅ **Редактирование и отметка выполнения задач**  
+✅ **Сохранение данных в `localStorage`** (работает без бэкенда)  
+✅ **Темная и светлая темы**  
+✅ **Анимации и плавные переходы (`framer-motion`)**  
+✅ **Уведомления (`react-toastify`)**   
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🚀 **Запуск проекта**  
+
+###  Установка зависимостей  
+```sh
+yarn install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+###  Запуск в режиме разработки  
+```sh
+yarn dev
 ```
+
+###  Сборка проекта  
+```sh
+yarn build
+```
+
+###  Деплой на GitHub Pages  
+```sh
+yarn deploy
+```
+
+*(Проект доступен по адресу: [Task Manager на GitHub Pages](https://Top4ik228-Akey-Ivan.github.io/task-manager/))*
+
+---
+
+## 🛠 **Технологии**  
+
+- ⚡ **Vite** — Быстрая сборка  
+- ⚛ **React + TypeScript** — Современный стек  
+- 🎨 **CSS-модули** — Изолированные стили  
+- 🎭 **Framer Motion** — Анимации  
+- 🛢 **React Toastify** — Уведомления  
+- 🌝 **Поддержка темной темы**  
+- 🛠 **ESLint + Prettier** — Чистый код  
+
+---
+
+## 🎯 **Планы на будущее**  
+
+🔹 Улучшение UI/UX  
+🔹 Расширение фильтров и поиска  
+🔹 Подключение PWA (чтобы работало как мобильное приложение)  
+
+---
+
+## ✨ **Автор**  
+👨‍💻 **Top4ik228-Akey-Ivan**  
+📌 **GitHub**: [Top4ik228-Akey-Ivan](https://github.com/Top4ik228-Akey-Ivan)  
+
+---

@@ -35,7 +35,6 @@ body{
 .App{
   margin: 50px auto;
   width: var(--laptop);
-  border: 2px solid black;
 
   position: relative;
 }
