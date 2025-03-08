@@ -14,7 +14,6 @@ interface CardListProps {
 }
 
 const CardsList: React.FC<CardListProps> = ({ activeSection, board }) => {
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [draggedCard, setDraggedCard] = useState<ICard | null>(null);
     const [filteredText, setFilteredText] = useState<string>('')
 
@@ -88,8 +87,6 @@ const CardsList: React.FC<CardListProps> = ({ activeSection, board }) => {
             </div>
 
             <AddCardBtn 
-                isModalOpen={isModalOpen} 
-                setIsModalOpen={setIsModalOpen} 
                 boardId={board.id}
             />
         </>

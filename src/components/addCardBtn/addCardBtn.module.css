@@ -57,6 +57,8 @@ input:focus, select:focus {
     border-radius: 10px;
 
     font-size: 24px;
+
+    cursor: pointer;
 }
 
 .addModal{

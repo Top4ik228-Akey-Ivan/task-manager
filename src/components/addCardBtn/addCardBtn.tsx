@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 
 import styles from './addCardBtn.module.css'
 import { useDispatch } from "react-redux";
@@ -10,11 +10,9 @@ import { addCard } from "../../redux/boards/actions";
 
 interface AddCardBrnProps {
     boardId: number;
-    isModalOpen: boolean;
-    setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const AddCardBtn: React.FC<AddCardBrnProps> = ({ boardId, isModalOpen, setIsModalOpen }) => {
+const AddCardBtn: React.FC<AddCardBrnProps> = ({ boardId }) => {
 
     const [title, setTitle] = useState<string>('')
     const [section, setSection] = useState<sectionType>('Work')
@@ -22,6 +20,8 @@ const AddCardBtn: React.FC<AddCardBrnProps> = ({ boardId, isModalOpen, setIsModa
     const [taskText, setTaskText] = useState<string>('')
     const [deadline, setDeadline] = useState<Date>(new Date)
     const [priority, setPriority] = useState<priorityType>('🟢 Low')
+
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const dispatch: AppDispatch = useDispatch()
 
